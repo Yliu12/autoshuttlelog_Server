@@ -38,10 +38,10 @@ public class LogController {
 	   }
 	   
 	
-	 @PostMapping("/log")
-   public ResponseEntity<?> save(@RequestBody Log log) {
-	      long id = logService.save(log);
-	      return ResponseEntity.ok().body("New log has been saved with ID:" + id);
+	 @PostMapping("/logs")
+   public ResponseEntity<?> save(@RequestBody List<Log> logs) {
+	      List<Long> idList = logService.save(logs);
+	      return ResponseEntity.ok().body("New log has been saved with ID:" + idList);
 	   }
 
 	 /*---Update a log by id---*/

@@ -12,7 +12,7 @@ public interface LogDAO {
 	public Log getByID(long id);
 
 
-	public long save(Log log);
+	public List<Long> save(List<Log> log);
 
 
 	public void update(long id, Log log);

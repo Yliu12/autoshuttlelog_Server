@@ -32,7 +32,7 @@ public class LogServiceImpl implements LogService {
 
 	@Transactional
 	@Override
-	public long save(Log log) {
+	public List<Long> save(List<Log> log) {
 		// TODO Auto-generated method stub
 		return logDAO.save(log);
 	}

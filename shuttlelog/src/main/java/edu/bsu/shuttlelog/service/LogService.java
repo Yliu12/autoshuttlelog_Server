@@ -7,7 +7,7 @@ import edu.bsu.shuttlelog.entity.Log;
 public interface LogService {
 	List<Log> list();
 
-	long save(Log log);
+	List<Long> save(List<Log> log);
 
 	Log getByID(long id);
 

@@ -1,5 +1,6 @@
 package edu.bsu.shuttlelog.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -41,9 +42,23 @@ public class logDAOImpl implements LogDAO {
 
 	@Override
 	@Transactional
-	public long save(Log log) {
-		sessionFactory.getCurrentSession().save(log);
-		return log.getId();
+	public List<Long> save(List<Log> logs) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Long> IDList = new ArrayList<Long>();
+		int i = 0;
+		
+		for (Log log : logs) {
+			session.save(log);
+			IDList.add(log.getId());
+			i++;
+			if (i % 20 == 0) { // 20, same as the JDBC batch size
+				// flush a batch of inserts and release memory:
+				System.out.println("first 20 finnished");
+				session.flush();
+				session.clear();
+			}
+		}
+		return IDList;
 	}
 
 	@Override
