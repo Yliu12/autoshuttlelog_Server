@@ -17,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.bsu.shuttlelog.entity.User;
 
 @Repository
-//TODO RESTRUCTURE DAO !!
+// TODO RESTRUCTURE DAO !!
 public class userDaoImpl implements UserDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -83,16 +83,18 @@ public class userDaoImpl implements UserDAO {
 
 		Root<User> root = query.from(User.class);
 
-		query.select(root).where(builder.equal(root.get("USERNAME"), userName));
-		query.select(root).where(builder.equal(root.get("password"), password));
+		query.select(root).where(builder.equal(root.get("password"), password),
+				builder.equal(root.get("userName"), userName));
 
 		// execute query and get result
 		Query<User> q = currentSession.createQuery(query);
-
-		User user = q.getSingleResult();
-
-		return user;
-
+		try {
+			User user = q.getSingleResult();
+			return user;
+		} catch (javax.persistence.NoResultException e) {
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -101,7 +103,7 @@ public class userDaoImpl implements UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		User user2 = session.byId(User.class).load(id);
 		user2.setCreateTime(user.getCreateTime());
-		//user2.setCreateTime(user.getCreateTime());
+		// user2.setCreateTime(user.getCreateTime());
 		user2.setFirstName(user.getFirstName());
 		user2.setLastName(user.getLastName());
 		user2.setPassword(user.getPassword());

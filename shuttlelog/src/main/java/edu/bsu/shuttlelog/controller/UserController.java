@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.bsu.shuttlelog.entity.Log;
 import edu.bsu.shuttlelog.entity.User;
@@ -59,13 +60,12 @@ public class UserController {
 		return ResponseEntity.ok().body("log has been updated successfully.");
 	}
 
-	@GetMapping("/login")
-	public ResponseEntity<?> update(@RequestBody Login login) {
-		userService.longin(login.getUsername(), login.getPassword());
-		return ResponseEntity.ok().body("log has been updated successfully.");
+	@PostMapping("/login")
+	public ResponseEntity<?> update(@RequestBody User login) {
+		return ResponseEntity.ok().body(userService.longin(login.getUserName(), login.getPassword()));
 	}
 
-	private class Login {
+	public class Login {
 		private String username;
 		private String password;
 
