@@ -15,7 +15,7 @@ public interface UserDAO {
 	public Long save(User user);
 
 
-	User getLogin(String userName, String Password);
+	User getLogin(String userName, String Password) throws Exception;
 
 	User update(long id, User user);
 

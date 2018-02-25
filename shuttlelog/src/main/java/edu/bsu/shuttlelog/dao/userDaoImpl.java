@@ -71,7 +71,7 @@ public class userDaoImpl implements UserDAO {
 
 	@Override
 	@Transactional
-	public User getLogin(String userName, String password) {
+	public User getLogin(String userName, String password) throws Exception {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// create a criteria
@@ -88,13 +88,10 @@ public class userDaoImpl implements UserDAO {
 
 		// execute query and get result
 		Query<User> q = currentSession.createQuery(query);
-		try {
-			User user = q.getSingleResult();
-			return user;
-		} catch (javax.persistence.NoResultException e) {
-			return null;
-		}
-		
+
+		User user = q.getSingleResult();
+		return user;
+
 	}
 
 	@Override

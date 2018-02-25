@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.bsu.shuttlelog.entity.Log;
 import edu.bsu.shuttlelog.entity.User;
+import edu.bsu.shuttlelog.resp.RespException;
 import edu.bsu.shuttlelog.service.LogService;
 import edu.bsu.shuttlelog.service.UserService;
 
@@ -43,7 +45,12 @@ public class UserController {
 
 	@PostMapping("/user")
 	public ResponseEntity<?> save(@RequestBody User users) {
-		Long id = userService.save(users);
+		Long id ;
+		try {
+			id = userService.save(users);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new RespException("11", "username is taken",e));
+		}
 		return ResponseEntity.ok().body("New user has been saved with ID:" + id);
 	}
 
@@ -58,30 +65,6 @@ public class UserController {
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody User user) {
 		userService.update(id, user);
 		return ResponseEntity.ok().body("log has been updated successfully.");
-	}
-
-	@PostMapping("/login")
-	public ResponseEntity<?> update(@RequestBody User login) {
-		return ResponseEntity.ok().body(userService.longin(login.getUserName(), login.getPassword()));
-	}
-
-	public class Login {
-		private String username;
-		private String password;
-
-		public String getUsername() {
-			return username;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		@Override
-		public String toString() {
-			return "Login [username=" + username + ", password=" + password + "]";
-		}
-
 	}
 
 }

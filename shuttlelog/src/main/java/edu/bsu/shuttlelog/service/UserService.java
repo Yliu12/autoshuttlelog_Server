@@ -9,11 +9,11 @@ public interface UserService {
 
 	List<Long> save(List<User> user);
 	
-	Long save(User user);
+	Long save(User user) throws Exception;
 	
 	//User getByUserName(long id);
 	
-	boolean longin(String userName, String Password);
+	boolean longin(String userName, String Password) throws Exception;
 	
 
 	User update(long id, User user);

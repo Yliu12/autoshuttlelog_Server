@@ -37,12 +37,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Long save(User user) {
+	public Long save(User user) throws Exception{
+	
 		return userDAO.save(user);
 	}
 
 	@Override
-	public boolean longin(String userName, String Password) {
+	public boolean longin(String userName, String Password) throws Exception {
 		return userDAO.getLogin(userName, Password) == null ? false : true;
 	}
 
