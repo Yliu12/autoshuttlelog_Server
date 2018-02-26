@@ -1,5 +1,6 @@
 package edu.bsu.shuttlelog.dao;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class logDAOImpl implements LogDAO {
 
 	@Override
 	@Transactional
-	public List<Long> save(List<Log> logs) {
+	public List<BigInteger> save(List<Log> logs) {
 		Session session = sessionFactory.getCurrentSession();
-		List<Long> IDList = new ArrayList<Long>();
+		List<BigInteger> IDList = new ArrayList<BigInteger>();
 		int i = 0;
 		
 		for (Log log : logs) {

@@ -1,5 +1,6 @@
 package edu.bsu.shuttlelog.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import edu.bsu.shuttlelog.entity.Log;
@@ -12,7 +13,7 @@ public interface LogDAO {
 	public Log getByID(long id);
 
 
-	public List<Long> save(List<Log> log);
+	public List<BigInteger> save(List<Log> log);
 
 
 	public void update(long id, Log log);

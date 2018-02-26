@@ -1,5 +1,6 @@
 package edu.bsu.shuttlelog.service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class LogServiceImpl implements LogService {
 
 	@Transactional
 	@Override
-	public List<Long> save(List<Log> log) {
+	public List<BigInteger> save(List<Log> log) {
 		// TODO Auto-generated method stub
 		return logDAO.save(log);
 	}

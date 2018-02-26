@@ -23,11 +23,11 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> update(@RequestBody User login) {
-		boolean status = false;
+		User user = null;
 		MyResp myresp = new MyResp();
 		try {
-			status = userService.longin(login.getUserName(), login.getPassword());
-			myresp.setRespBody(status);
+			user = userService.longin(login.getUserName(), login.getPassword());
+			myresp.setRespBody(user);
 		} catch (javax.persistence.NoResultException e) {
 			myresp.setError(new RespException("21", "Username doesn't exist", e));
 		} catch (Exception e) {

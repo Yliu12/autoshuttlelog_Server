@@ -13,7 +13,7 @@ public interface UserService {
 	
 	//User getByUserName(long id);
 	
-	boolean longin(String userName, String Password) throws Exception;
+	User longin(String userName, String Password) throws Exception;
 	
 
 	User update(long id, User user);

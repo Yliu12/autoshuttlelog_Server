@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean longin(String userName, String Password) throws Exception {
-		return userDAO.getLogin(userName, Password) == null ? false : true;
+	public User longin(String userName, String Password) throws Exception {
+		return userDAO.getLogin(userName, Password);
 	}
 
 	// TODO ADD AUTHENTICATION !!!

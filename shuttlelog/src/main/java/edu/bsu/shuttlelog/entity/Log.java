@@ -1,5 +1,6 @@
 package edu.bsu.shuttlelog.entity;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ public class Log {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private BigInteger id;
 
 	@Column(name = "LOOP_NAME")
 	private String loopName;
@@ -47,7 +48,7 @@ public class Log {
 		this.time = time;
 	}
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
@@ -57,7 +58,7 @@ public class Log {
 				+ numberBoarded + ", numberLeft=" + numberLeft + ", busId=" + busId + ", time=" + time + "]";
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 
