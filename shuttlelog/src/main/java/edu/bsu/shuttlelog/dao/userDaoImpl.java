@@ -83,14 +83,17 @@ public class userDaoImpl implements UserDAO {
 
 		Root<User> root = query.from(User.class);
 
-		query.select(root).where(builder.equal(root.get("password"), password),
-				builder.equal(root.get("userName"), userName));
+		query.select(root).where(builder.equal(root.get("userName"), userName));
 
 		// execute query and get result
 		Query<User> q = currentSession.createQuery(query);
 
+		
 		User user = q.getSingleResult();
-		return user;
+		if( user.getPassword().equals(password)) {
+			return user;
+		}
+		return null;
 
 	}
 

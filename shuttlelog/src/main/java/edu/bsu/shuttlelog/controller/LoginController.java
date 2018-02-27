@@ -27,7 +27,11 @@ public class LoginController {
 		MyResp myresp = new MyResp();
 		try {
 			user = userService.longin(login.getUserName(), login.getPassword());
-			myresp.setRespBody(user);
+			if(user== null) {
+			myresp.setError(new RespException("22", "Username password does not match.", null));
+			}else {
+				myresp.setRespBody(user);
+			}
 		} catch (javax.persistence.NoResultException e) {
 			myresp.setError(new RespException("21", "Username doesn't exist", e));
 		} catch (Exception e) {

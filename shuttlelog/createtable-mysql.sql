@@ -7,6 +7,7 @@ CREATE TABLE yliu12.log(
     NUMBER_BOARDED varchar(32),
     NUMBER_LEFT varchar(32),
     BUS_ID varchar(32),
+    	Position varchar(32),
 	PRIMARY KEY (ID)
 );
 
