@@ -27,7 +27,7 @@ public class logDAOImpl implements LogDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// create a query
-		Query<Log> theQuery = currentSession.createQuery("from Log", Log.class);
+		Query<Log> theQuery = currentSession.createQuery("from Log order by id desc", Log.class);
 
 		// execute query and get result
 		List<Log> logs = theQuery.getResultList();
