@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.bsu.shuttlelog.entity.Log;
 import edu.bsu.shuttlelog.entity.User;
 import edu.bsu.shuttlelog.resp.RespException;
-import edu.bsu.shuttlelog.service.LogService;
 import edu.bsu.shuttlelog.service.UserService;
+import edu.bsu.shuttlelog.service.log.LogService;
 
 /**
  * Created by yliu12 on 2018/2/19.

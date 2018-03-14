@@ -1,4 +1,4 @@
-package edu.bsu.shuttlelog.controller;
+package edu.bsu.shuttlelog.controller.log;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import edu.bsu.shuttlelog.entity.Log;
 import edu.bsu.shuttlelog.resp.MyResp;
 import edu.bsu.shuttlelog.resp.RespException;
-import edu.bsu.shuttlelog.service.LogService;
+import edu.bsu.shuttlelog.service.log.LogReq;
+import edu.bsu.shuttlelog.service.log.LogService;
 
 /**
  * Created by yliu12 on 2018/2/19.
@@ -43,14 +44,18 @@ public class LogController {
 	}
 
 	@PostMapping("/logs")
-	public ResponseEntity<?> save(@RequestBody List<Log> logs) {
+	public ResponseEntity<?> save(@RequestBody LogReq logreq) {
 		MyResp myresp = new MyResp();
 		List<BigInteger> idList = null;
 		try {
-			idList = logService.save(logs);
+			idList = logService.save(logreq);
 			myresp.setRespBody(idList);
+		} catch (javax.persistence.NoResultException e) {
+			myresp.setError(new RespException("321", "Username doesn't exist", e));
+		} catch (RespException e) {
+			myresp.setError(e);
 		} catch (Exception e) {
-			myresp.setError(new RespException("31", "error adding logs", e));
+			myresp.setError(new RespException("31", "Unknow error adding logs", e));
 		}
 		return ResponseEntity.ok().body(myresp);
 	}
