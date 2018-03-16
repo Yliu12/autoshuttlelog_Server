@@ -31,13 +31,14 @@ select * from yliu12.log
 CREATE TABLE yliu12.User(
 	ID INT NOT NULL AUTO_INCREMENT,
     Create_time datetime,
+    last_update_time datetime,
     First_NAME varchar(32),
     Last_NAME varchar(32),
     Password varchar(32),
     USERNAME varchar(32),
     ROLE varchar(32),
     STATUS varchar(32),
-    TOKEN varchar(32),
+    TOKEN varchar(64),
     expire_at varchar(32),
 	PRIMARY KEY (ID)
 );
