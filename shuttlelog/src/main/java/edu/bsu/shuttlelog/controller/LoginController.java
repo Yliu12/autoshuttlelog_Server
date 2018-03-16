@@ -1,10 +1,14 @@
 package edu.bsu.shuttlelog.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.scienjus.authorization.manager.TokenManager;
 
 import edu.bsu.shuttlelog.entity.User;
 import edu.bsu.shuttlelog.resp.MyResp;
@@ -20,6 +24,8 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
+	 @Autowired
+	    private TokenManager tokenManager;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> update(@RequestBody User login) {
@@ -30,7 +36,9 @@ public class LoginController {
 			if(user== null) {
 			myresp.setError(new RespException("22", "Username password does not match.", null));
 			}else {
-				myresp.setRespBody(user);
+				 String token = UUID.randomUUID().toString();
+			        tokenManager.createRelationship(user.getUserName(), token);
+				myresp.setRespBody(token);
 			}
 		} catch (javax.persistence.NoResultException e) {
 			myresp.setError(new RespException("21", "Username doesn't exist", e));
@@ -39,5 +47,7 @@ public class LoginController {
 		}
 		return ResponseEntity.ok().body(myresp);
 	}
+	
+	
 
 }

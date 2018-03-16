@@ -168,11 +168,34 @@
 		</dependency>
 		<!-- Jackson API for JSON -->
 		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.8.7</version>
+	    </dependency>
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.7</version>
 		</dependency>
 
-
+		<!-- Spring Auth form https://github.com/ScienJus/spring-authorization-manager -->
+		<dependency>
+		    <groupId>com.scienjus</groupId>
+		    <artifactId>spring-authorization-manager</artifactId>
+		    <version>1.0-SNAPSHOT</version>
+		</dependency>
+		
 	</dependencies>
+	
+	<repositories>
+		<repository>
+		    <id>scienjus-mvn-repo</id>
+		    <url>https://raw.github.com/ScienJus/maven/snapshot/</url>
+		    <snapshots>
+		        <enabled>true</enabled>
+		        <updatePolicy>always</updatePolicy>
+		    </snapshots>
+		</repository>
+	</repositories>
+	
 </project>

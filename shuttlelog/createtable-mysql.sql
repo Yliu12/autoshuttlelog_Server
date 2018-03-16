@@ -37,6 +37,8 @@ CREATE TABLE yliu12.User(
     USERNAME varchar(32),
     ROLE varchar(32),
     STATUS varchar(32),
+    TOKEN varchar(32),
+    expire_at varchar(32),
 	PRIMARY KEY (ID)
 );
 
