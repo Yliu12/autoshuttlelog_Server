@@ -5,6 +5,7 @@
 	<groupId>edu.bsu</groupId>
 	<artifactId>shuttlelog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<packaging>jar</packaging>
 
 	<name>shuttlelog</name>
@@ -12,6 +13,8 @@
 
 
 	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework-version>4.3.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
@@ -168,34 +171,35 @@
 		</dependency>
 		<!-- Jackson API for JSON -->
 		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-		    <version>2.8.7</version>
-	    </dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.8.7</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.8.7</version>
 		</dependency>
 
-		<!-- Spring Auth form https://github.com/ScienJus/spring-authorization-manager -->
+
+
+
+		<!--JSON WEB TOKEN -->
 		<dependency>
-		    <groupId>com.scienjus</groupId>
-		    <artifactId>spring-authorization-manager</artifactId>
-		    <version>1.0-SNAPSHOT</version>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.6.0</version>
 		</dependency>
-		
+
+		<!-- Authentication package , Removed due to no Oracle Support -->
+		<!-- Spring Auth form https://github.com/ScienJus/spring-authorization-manager -->
+		<!-- <dependency> <groupId>com.scienjus</groupId> <artifactId>spring-authorization-manager</artifactId> 
+			<version>1.0-SNAPSHOT</version> </dependency> -->
+
 	</dependencies>
-	
-	<repositories>
-		<repository>
-		    <id>scienjus-mvn-repo</id>
-		    <url>https://raw.github.com/ScienJus/maven/snapshot/</url>
-		    <snapshots>
-		        <enabled>true</enabled>
-		        <updatePolicy>always</updatePolicy>
-		    </snapshots>
-		</repository>
-	</repositories>
-	
+
+	<!-- <repositories> <repository> <id>scienjus-mvn-repo</id> <url>https://raw.github.com/ScienJus/maven/snapshot/</url> 
+		<snapshots> <enabled>true</enabled> <updatePolicy>always</updatePolicy> </snapshots> 
+		</repository> </repositories> -->
+
 </project>

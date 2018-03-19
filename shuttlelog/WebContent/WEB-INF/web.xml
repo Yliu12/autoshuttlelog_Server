@@ -7,15 +7,7 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
-	<listener>
-	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 
-
-	<context-param>
-	    <param-name>contextConfigLocation</param-name>
-	    <param-value>/WEB-INF/spring-crud-servlet.xml</param-value>
-	</context-param>
 	
   <servlet>
     <servlet-name>dispatcher</servlet-name>
@@ -32,6 +24,8 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+
   
 
 

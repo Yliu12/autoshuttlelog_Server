@@ -43,6 +43,7 @@ public class User {
 
 	@Column(name = "STATUS_CODE")
 	private String statusCode;
+	
 
 	public long getId() {
 		return id;

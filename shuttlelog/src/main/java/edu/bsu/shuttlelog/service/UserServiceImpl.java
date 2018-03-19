@@ -37,8 +37,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Long save(User user) throws Exception{
-	
+	public Long save(User user) throws Exception {
+		user.setLastUpdateTime(new Timestamp(Calendar.getInstance().getTime().getTime()));
+		user.setCreateTime(user.getLastUpdateTime());
 		return userDAO.save(user);
 	}
 

@@ -67,37 +67,7 @@
 	<!-- Add support for reading web resources: css, images, js, etc ... -->
 
 
-  <!--管理验证信息的bean-->
-	<bean id="tokenManager" class="com.scienjus.authorization.manager.impl.DBTokenManager">
-	       <!--Token失效时间-->
-	       <property name="tokenExpireSeconds" value="36000" />
-	       <!--数据源-->
-	       <property name="dataSource" ref="myDataSource" />
-	       <!--存储验证信息的表名-->
-	       <property name="tableName" value="User" />
-	       <!--存储Key的字段名-->
-	       <property name="keyColumnName" value="USERNAME" />
-	       <!--存储Token的字段名-->
-	       <property name="tokenColumnName" value="TOKEN" />
-	       <!--存储Token过期时间的字段名-->
-	       <property name="expireAtColumnName" value="expire_at" />
-	</bean>
 
-
-	<mvc:interceptors>
-	       <!--身份验证的拦截器-->
-	       <bean id="authorizationInterceptor" class="com.scienjus.authorization.interceptor.AuthorizationInterceptor">
-	              <!--验证信息存储的Http头-->
-	              <property name="httpHeaderName" value="authorization" />
-	              <!--验证信息通用前缀，例如Bearer-->
-	              <property name="httpHeaderPrefix" value="" />
-	              <!--验证失败时的错误信息-->
-	              <property name="unauthorizedErrorMessage" value="Token Expired, please login again" />
-	              <!--管理验证信息的bean-->
-	              <property name="manager" ref="tokenManager" />
-	       </bean>
-	</mvc:interceptors>
- 
 </beans>
 
 

@@ -35,13 +35,13 @@ public class UserController {
 		return ResponseEntity.ok().body(users);
 	}
 
-	// /*---Get a user by id---*/
-	// @GetMapping("/user/{id}")
-	// public ResponseEntity<Log> get(@PathVariable("id") long id) {
-	// Log log = userService
-	// return ResponseEntity.ok().body(log);
-	// }
-	//
+//	 /*---Get a user by id---*/
+//	 @GetMapping("/user/{id}")
+//	 public ResponseEntity<Log> get(@PathVariable("id") long id) {
+//	 Log log = userService
+//	 return ResponseEntity.ok().body(log);
+//	 }
+//	
 
 	@PostMapping("/user")
 	public ResponseEntity<?> save(@RequestBody User users) {

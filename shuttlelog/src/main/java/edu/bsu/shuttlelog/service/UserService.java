@@ -4,7 +4,7 @@ import java.util.List;
 
 import edu.bsu.shuttlelog.entity.User;
 
-public interface UserService {
+public interface UserService  {
 	List<User> list();
 
 	List<Long> save(List<User> user);
