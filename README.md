@@ -37,7 +37,7 @@
   Go to code and 
 
   ```
-  mvn tomcat6:deploy
+  mvn tomcat7:deploy
   ```
   
  
