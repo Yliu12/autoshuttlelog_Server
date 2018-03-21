@@ -24,6 +24,8 @@
  
  6. And you are good to Run or debug.
  
+Please add [this](https://yingliucapstone.wordpress.com/2018/03/19/add-this-to-web-xml/) to your tomcat web.xml right before the last closing tag.
+ 
   ### Deploy with Maven Tomcat
   
   If you are using windows, remember to set the enviroment variables properly (please google instructions).
