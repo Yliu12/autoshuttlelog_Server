@@ -18,7 +18,7 @@ import edu.bsu.shuttlelog.entity.User;
 
 @Repository
 // TODO RESTRUCTURE DAO !!
-public class userDaoImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -88,9 +88,8 @@ public class userDaoImpl implements UserDAO {
 		// execute query and get result
 		Query<User> q = currentSession.createQuery(query);
 
-		
 		User user = q.getSingleResult();
-		if( user.getPassword().equals(password)) {
+		if (user.getPassword().equals(password)) {
 			return user;
 		}
 		return null;
@@ -112,7 +111,6 @@ public class userDaoImpl implements UserDAO {
 		user2.setUserName(user.getUserName());
 		session.flush();
 		return user2;
-
 	}
 
 }

@@ -35,9 +35,23 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/user")
-	public ResponseEntity<List<User>> list() {
-		List<User> users = userService.list();
-		return ResponseEntity.ok().body(users);
+	public ResponseEntity<MyResp> list(@RequestHeader(value = "token") String token) {
+		MyResp myresp = new MyResp();
+		try {
+			AuthUtil.userAuth(token, AuthUtil.MANAGER_CODE);
+			List<User> users = userService.list();
+			myresp.setRespBody(users);
+		} catch (RespException e) {
+			myresp.setError(e);
+			if (e.getRetCd().equals("403")) {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			myresp.setError(new RespException("10", "Error Listing User", e));
+			return ResponseEntity.badRequest().body(myresp);
+		}
+		return ResponseEntity.ok().body(myresp);
 	}
 
 	// /*---Get a user by id---*/
