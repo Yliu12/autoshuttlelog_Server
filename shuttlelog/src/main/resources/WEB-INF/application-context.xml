@@ -52,6 +52,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.default_schema">bsu_yliu12</prop>
 			</props>
 		</property>
 	</bean>
