@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,11 @@ import javax.persistence.Table;
 public class Loop {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "BSULOOP_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
+	
 	@Column(name = "id")
 	private BigInteger id;
 

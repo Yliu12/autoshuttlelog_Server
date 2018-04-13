@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +24,11 @@ public class Log {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	// ORACLE 
 	@Column(name = "id")
+	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "LOG_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	private BigInteger id;
 
 	@Column(name = "LOOP_NAME")
@@ -47,15 +51,13 @@ public class Log {
 
 	@Column(name = "RECORD_time")
 	private Timestamp time;
-	
+
 	@Column(name = "Position")
 	private String position;
 
 	public Timestamp getTime() {
 		return time;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -115,6 +117,7 @@ public class Log {
 	public void setBusId(String busId) {
 		this.busId = busId;
 	}
+
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}

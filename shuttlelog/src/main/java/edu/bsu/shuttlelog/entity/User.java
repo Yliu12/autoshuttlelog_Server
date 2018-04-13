@@ -7,16 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "sl_user")
 // @Where(clause = "STATUS_CODE='1'")
 // active user only
 
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	
+	//Oracle
+
+	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "	USER_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id")
 	private long id;
 
