@@ -8,7 +8,7 @@
 
 
 
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>shuttlelog</name>
 	<url>http://maven.apache.org</url>
