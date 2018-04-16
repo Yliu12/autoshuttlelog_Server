@@ -78,10 +78,10 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
 			}
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new RespException("11", "username is taken", e));
+			myresp.setError(new RespException("11", "username is taken",e));
 		}
 
-		return ResponseEntity.ok().body("New user has been saved with ID:" + myresp);
+		return ResponseEntity.ok().body(myresp);
 	}
 
 	@PostMapping("/users")
@@ -101,7 +101,7 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
 			}
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new RespException("11", "username is taken", e));
+			myresp.setError(new RespException("11", "username is taken",e));
 		}
 		return ResponseEntity.ok().body("New users have been saved with ID:" + myresp);
 
