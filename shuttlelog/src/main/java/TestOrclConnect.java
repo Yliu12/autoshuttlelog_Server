@@ -7,6 +7,8 @@ public class TestOrclConnect {
 		Statement stmt = null;
 		Connection conn = null;
 		try {
+			System.out.println("Testing JDBC Connection");
+
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String dbURL = "jdbc:oracle:thin:@tband.aws.bsu.edu:1521/TEST";
 			conn = DriverManager.getConnection(dbURL, "bsu_yliu12", "XpW0BU_lo17Drop1");
@@ -15,13 +17,16 @@ public class TestOrclConnect {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				if (rs != null) {
 					rs.close();
 					rs = null;
 				}
-				if (stmt != null) {
+				if (stmt != null) { 
+					
 					stmt.close();
 					stmt = null;
 				}
