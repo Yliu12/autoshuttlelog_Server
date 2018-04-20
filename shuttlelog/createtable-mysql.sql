@@ -77,4 +77,21 @@ insert into yliu12.BSULoop(
     select * from yliu12.BSULoop;
 
 #	Green Loop Stops 
-#   ["North Shelter - N", "Anthony - N", "Alumni", "Stadium","Scheidler 1","Scheidler 2","Scheidler 3", "Baseball Field", "Anthony - S","North Shelter - S","Lafollette - S","Shafer Tower -S ", "AJ", "Burkhardt", "South Shelter", "Ashland", "MU","Shafer Tower -N ","Lafollette - N"]
+#   
+
+["North Shelter - N", "Anthony - N", "Alumni", "Stadium","Scheidler 1","Scheidler 2","Scheidler 3", "Baseball Field", "Anthony - S","North Shelter - S","Lafollette - S","Shafer Tower -S ", "AJ", "Burkhardt", "South Shelter", "Ashland", "MU","Shafer Tower -N ","Lafollette - N"]
+
+
+
+
+# insert loops
+
+/*
+-- Query: SELECT * FROM yliu12.bsuloop
+LIMIT 0, 10000
+
+-- Date: 2018-04-19 22:53
+*/
+INSERT INTO `bsuloop` (`ID`,`Create_time`,`last_update_time`,`LOOP_NAME`,`STOPS`,`STATUS_CODE`) VALUES (1,'2017-10-05 00:00:00','2017-10-05 00:00:00','Green Loop','[\"North Shelter - N\", \"Anthony - N\", \"Alumni\", \"Stadium\",\"Scheidler 1\",\"Scheidler 2\",\"Scheidler 3\", \"Baseball Field\", \"Anthony - S\",\"North Shelter - S\",\"Lafollette - S\",\"Shafer Tower -S \", \"AJ\", \"Burkhardt\", \"South Shelter\", \"Ashland\", \"MU\",\"Shafer Tower -N \",\"Lafollette - N\"]','1');
+INSERT INTO `bsuloop` (`ID`,`Create_time`,`last_update_time`,`LOOP_NAME`,`STOPS`,`STATUS_CODE`) VALUES (2,'2018-03-26 21:49:17','2018-03-26 22:00:35','Blue Loop','[\"Stu West Stop\", \"Linden & Neely Streets\",  \"Linden St & Wayne St\", \"Linden St  & Riverside Avenue\", \"Riverside & New York Avenue\", \"Emens Stop\", \"MU\", \"Shafer Tower\"]','1');
+INSERT INTO `bsuloop` (`ID`,`Create_time`,`last_update_time`,`LOOP_NAME`,`STOPS`,`STATUS_CODE`) VALUES (3,'2018-03-26 21:49:17','2018-03-26 22:00:35','Red Loop','[\"North Shelter - N\",  \"Anthony - N\", \"Oakwood\", \"Anthony - S\", \"North Shelter-S\",\"Lafollette - S\",\"Shafer Tower -S \", \"AJ\", \"Burkhardt\", \"South Shelter\", \"Ashland\", \"MU\",\"Shafer Tower -N \",\"Lafollette - N\"]\n','1');
