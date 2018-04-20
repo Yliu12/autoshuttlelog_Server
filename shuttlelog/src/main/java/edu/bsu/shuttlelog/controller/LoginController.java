@@ -99,4 +99,43 @@ public class LoginController {
 		return ResponseEntity.ok().body(myresp);
 	}
 
+	@PostMapping("/managerlogin")
+	public ResponseEntity<?> managerLogin(@RequestBody User login) {
+		User user = null;
+		MyResp myresp = new MyResp();
+		try {
+			user = userService.longin(login.getUserName(), login.getPassword());
+			if (user == null) {
+				myresp.setError(new RespException("22", "Username password does not match.", null));
+			} else {
+				HashMap<String, Object> respBody = new HashMap<String, Object>();
+
+				if (user.getRole().equals(AuthUtil.MANAGER_CODE)) {
+					// set User Info
+					HashMap<String, Object> loginInfo = new HashMap<String, Object>();
+					loginInfo.put("id", user.getId());
+					loginInfo.put("role", user.getRole());
+					loginInfo.put("userName", user.getUserName());
+					String sessionId = JavaWebToken.createJavaWebToken(loginInfo);
+					System.out.println("sessionID" + sessionId);
+
+					respBody.put("token", sessionId);
+					respBody.putAll(loginInfo);
+					// respBody.put("token", token);
+
+					myresp.setRespBody(respBody);
+				} else {
+					myresp.setError(new RespException("403", "Wrong Username Or Password", null));
+				}
+			}
+		} catch (javax.persistence.NoResultException e) {
+			myresp.setError(new RespException("21", "Username doesn't exist", e));
+			e.printStackTrace();
+		} catch (Exception e) {
+			myresp.setError(new RespException("29", "Unknow Error Please See Log", e));
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok().body(myresp);
+	}
+
 }
