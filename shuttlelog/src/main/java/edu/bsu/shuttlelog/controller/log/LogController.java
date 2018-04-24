@@ -53,8 +53,8 @@ public class LogController {
 		List<BigInteger> idList = null;
 
 		try {
-
-			AuthUtil.driverAuth(token);
+			// driver authentication. Throw RespException error 403 if not authorized.
+			AuthUtil.userAuth(token, AuthUtil.DRIVER_CODE);
 
 			idList = logService.save(logreq);
 			myresp.setRespBody(idList);
