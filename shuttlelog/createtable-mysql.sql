@@ -1,13 +1,13 @@
 CREATE TABLE yliu12.log(
-	ID BIGINT NOT NULL AUTO_INCREMENT,
-    RECORD_time datetime,
+	ID bigint AUTO_INCREMENT NOT NULL,
+    RECORD_time timestamp,
     LOOP_NAME varchar(32),
     STOP_SHORT varchar(32),
     DRIVER_USERNAME varchar(32),
     NUMBER_BOARDED varchar(32),
     NUMBER_LEFT varchar(32),
     BUS_ID varchar(32),
-    	Position varchar(32),
+    Position varchar(32),
 	PRIMARY KEY (ID)
 );
 
