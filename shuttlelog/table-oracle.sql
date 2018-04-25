@@ -1,4 +1,4 @@
-select * from bsu_yliu12.LOG
+select * from bsu_LOG
 
 CREATE SEQUENCE log_seq START WITH 1 INCREMENT BY 1;
 
@@ -67,7 +67,63 @@ insert into BSULoop(
     LOOP_NAME,
     STOPS ,
     STATUS_CODE
-    )values (SYSDATE,SYSDATE,'Green Loop','['North Shelter - N', 'Anthony - N', 'Alumni', 'Stadium','Scheidler 1','Scheidler 2','Scheidler 3', 'Baseball Field', 'Anthony - S','North Shelter - S','Lafollette - S','Shafer Tower -S ', 'AJ', 'Burkhardt', 'South Shelter', 'Ashland', 'MU','Shafer Tower -N ','Lafollette - N']','1');
+    )values (SYSDATE,SYSDATE,'Green Loop','["North Shelter - N", "Anthony - N", "Alumni", "Stadium","Scheidler 1","Scheidler 2","Scheidler 3", "Baseball Field", "Anthony - S","North Shelter - S","Lafollette - S","Shafer Tower -S ", "AJ", "Burkhardt", "South Shelter", "Ashland", "MU","Shafer Tower -N ","Lafollette - N"]','1');
 
     select * from BSULoop;
+	
+	
+	
+	
+	
+	
+	
+	
+==============================Report_Stop================================
+
+
+CREATE TABLE DAILYREPORT_stop(
+    ID number(19) NOT NULL,
+    Record_date timestamp(0),
+    LOOP_NAME varchar2(32),
+    STOP_NAME varchar2(32),
+    NUMBER_BOARDED number(19),
+    NUMBER_LEFT number(19),
+	PRIMARY KEY (ID)
+);
+
+-- Generate ID using sequence and trigger
+CREATE SEQUENCE DAILYREPORT_stop_seq START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER DAILYREPORT_stop_seq_tr
+ BEFORE INSERT ON DAILYREPORT_stop FOR EACH ROW
+ WHEN (NEW.ID IS NULL)
+BEGIN
+ SELECT DAILYREPORT_stop_seq.NEXTVAL INTO :NEW.ID FROM DUAL;
+END;
+/
+
+
+SELECT record_date,
+       stop_name,
+       loop_name,
+       SUM(number_boarded) AS NUMBER_BOARDED,
+       SUM(number_left)    AS NUMBER_LEFT
+FROM   (SELECT DISTINCT Concat(record_time, bus_id) AS Hash,
+                         TRUNC(record_time)   AS Record_date,
+                        stop_short                  AS STOP_NAME,
+                        loop_name,
+                        number_boarded,
+                        number_left
+        FROM   log)
+where Record_date = TRUNC(SYSDATE) - 1
+GROUP  BY stop_name,
+          loop_name,
+          record_date;
+
+
+commit;
+
+		  
+		  
+		  
     
