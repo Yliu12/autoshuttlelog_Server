@@ -18,4 +18,7 @@ public interface LogDAO {
 
 	public void update(long id, Log log);
 
+
+	BigInteger save(Log log);
+
 }

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "log")
@@ -44,7 +46,7 @@ public class Log {
 
 	@Column(name = "BUS_ID")
 	private String busId;
-
+	
 	@Column(name = "RECORD_time")
 	private Timestamp time;
 	

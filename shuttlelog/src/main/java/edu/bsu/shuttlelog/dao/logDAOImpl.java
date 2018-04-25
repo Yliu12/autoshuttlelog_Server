@@ -1,7 +1,9 @@
 package edu.bsu.shuttlelog.dao;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -47,10 +49,13 @@ public class logDAOImpl implements LogDAO {
 		Session session = sessionFactory.getCurrentSession();
 		List<BigInteger> IDList = new ArrayList<BigInteger>();
 		int i = 0;
-		
+
 		for (Log log : logs) {
-			session.save(log);
-			IDList.add(log.getId());
+
+			if (!searchOne(log).isEmpty()) {
+				continue;
+			}
+			IDList.add(save(log));
 			i++;
 			if (i % 20 == 0) { // 20, same as the JDBC batch size
 				// flush a batch of inserts and release memory:
@@ -74,6 +79,37 @@ public class logDAOImpl implements LogDAO {
 		log2.setNumberLeft(log.getNumberLeft());
 		log2.setTime(log.getTime());
 		session.flush();
+	}
+
+	// TODO Error handling, When Username exist
+	@Override
+	@Transactional
+	public BigInteger save(Log log) {
+		sessionFactory.getCurrentSession().save(log);
+		return log.getId();
+
+	}
+
+	private List searchOne(Log log) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(log.getTime());
+		if (cal.get(Calendar.MILLISECOND) >= 500) {
+			System.out.println("Round off milliseconds to seconds");
+			cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + 1);
+		}
+		cal.set(Calendar.MILLISECOND, 0);
+		
+		Timestamp ts = new Timestamp(cal.getTimeInMillis());
+
+		Query query = currentSession.createQuery("from Log l where l.time = :time and l.busId = :busId");
+		// Timestamp ts = new Timestamp(1000 * (log.getTime().getTime()) / 1000);
+		query.setParameter("time", ts);
+		System.out.println(ts);
+		query.setParameter("busId", log.getBusId());
+		List l  = query.getResultList();
+		return l;
 	}
 
 }
