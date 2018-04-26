@@ -61,7 +61,7 @@ public class LoopDAOImpl implements LoopDAO {
 
 	@Override
 	@Transactional
-	public BigInteger save(Loop loop) throws Exception {
+	public long save(Loop loop) throws Exception {
 		loop.setCreateTime(new Timestamp(Calendar.getInstance().getTime().getTime()));
 		loop.setLastUpdateTime(loop.getLastUpdateTime());
 		sessionFactory.getCurrentSession().save(loop);

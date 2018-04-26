@@ -23,14 +23,28 @@ public class DailyTasks {
 
 		System.out.println("do something");
 		try {
-			String sql = "INSERT INTO dailyreport_hour \n" + "            (record_date, \n" + "             hour, \n"
-					+ "             loop_name, \n" + "             number_boarded, \n" + "             number_left) \n"
-					+ "SELECT Cast(record_time AS date) AS date, \n" + "       Hour(record_time)         AS hour, \n"
-					+ "       loop_name, \n" + "       Sum(number_boarded)       AS NUMBER_BOARDED, \n"
-					+ "       Sum(number_left)          AS NUMBER_LEFT \n" + "FROM   log \n"
-					+ "WHERE  Cast(record_time AS date) = Subdate(CURRENT_DATE, 1) \n"
-					+ "GROUP  BY Hour(record_time), \n" + "          loop_name, \n"
-					+ "          Cast(record_time AS date); ";
+			String sql = "insert into  DAILYREPORT_hour(\n" + 
+					"    Record_date,\n" + 
+					"    hour,\n" + 
+					"    LOOP_NAME,\n" + 
+					"    NUMBER_BOARDED,\n" + 
+					"    NUMBER_LEFT\n" + 
+					")\n" + 
+					"SELECT record_date,\n" + 
+					"       HOUR,\n" + 
+					"       loop_name,\n" + 
+					"       SUM(number_boarded) AS NUMBER_BOARDED,\n" + 
+					"       SUM(number_left)    AS NUMBER_LEFT\n" + 
+					"FROM   (SELECT DISTINCT Concat(record_time, bus_id) AS Hash,\n" + 
+					"                         TRUNC(record_time)   AS Record_date,\n" + 
+					"                        EXTRACT(HOUR from record_time)  AS HOUR,\n" + 
+					"                        loop_name,\n" + 
+					"                        number_boarded,\n" + 
+					"                        number_left\n" + 
+					"        FROM   log where TRUNC(record_time) = TRUNC(SYSDATE) - 1)\n" + 
+					"GROUP  BY HOUR,\n" + 
+					"          loop_name,\n" + 
+					"          record_date;";
 			int result = baseService.excuteBySql(sql);
 			System.out.println("---009:" + result);
 		} catch (Exception e) {
@@ -47,19 +61,31 @@ public class DailyTasks {
 
 		System.out.println("do something");
 		try {
-			String sql = "INSERT INTO yliu12.dailyreport_stop \n" + "            (record_date, \n"
-					+ "             stop_name, \n" + "             loop_name, \n" + "             number_boarded, \n"
-					+ "             number_left) \n" + "SELECT Cast(record_time AS date) AS Record_date, \n"
-					+ "       stop_short                AS STOP_NAME, \n" + "       loop_name, \n"
-					+ "       Sum(number_boarded)       AS NUMBER_BOARDED, \n"
-					+ "       Sum(number_left)          AS NUMBER_LEFT \n" + "FROM   yliu12.log \n"
-					+ "WHERE  Cast(record_time AS date) = Subdate(CURRENT_DATE, 1) \n" + "GROUP  BY stop_short, \n"
-					+ "          loop_name, \n" + "          Cast(record_time AS date); ";
+			String sql = "INSERT INTO dailyreport_stop \n" + 
+					"            (record_date, \n" + 
+					"             stop_name, \n" + 
+					"             loop_name, \n" + 
+					"             number_boarded, \n" + 
+					"             number_left) \n" + 
+					"SELECT record_date, \n" + 
+					"       stop_name, \n" + 
+					"       loop_name, \n" + 
+					"       SUM(number_boarded) AS NUMBER_BOARDED, \n" + 
+					"       SUM(number_left)    AS NUMBER_LEFT \n" + 
+					"FROM   (SELECT DISTINCT Concat(record_time, bus_id) AS Hash, \n" + 
+					"                        Trunc(record_time)          AS Record_date, \n" + 
+					"                        stop_short                  AS STOP_NAME, \n" + 
+					"                        loop_name, \n" + 
+					"                        number_boarded, \n" + 
+					"                        number_left \n" + 
+					"        FROM   log log where TRUNC(record_time) = TRUNC(SYSDATE) - 1) \n" + 
+					"GROUP  BY stop_name, \n" + 
+					"          loop_name, \n" + 
+					"          record_date; ";
 			int result = baseService.excuteBySql(sql);
 			System.out.println("---009:" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

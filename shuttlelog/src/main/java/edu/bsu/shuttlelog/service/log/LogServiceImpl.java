@@ -37,7 +37,7 @@ public class LogServiceImpl implements LogService {
 
 	@Transactional
 	@Override
-	public List<BigInteger> save(LogReq logReq) throws Exception {
+	public List<Long> save(LogReq logReq) throws Exception {
 //		if (logReq.getUser() == null || logReq.getUser().getUserName() == null) {
 //			throw new RespException("331", "Authentication failed, no user info", null);
 //		}

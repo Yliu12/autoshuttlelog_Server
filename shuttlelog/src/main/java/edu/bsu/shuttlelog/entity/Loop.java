@@ -22,7 +22,7 @@ public class Loop {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	
 	@Column(name = "id")
-	private BigInteger id;
+	private long id;
 
 	@Column(name = "LOOP_NAME")
 	private String loopName;
@@ -39,11 +39,11 @@ public class Loop {
 	@Column(name = "STATUS_CODE")
 	private String statusCode;
 
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

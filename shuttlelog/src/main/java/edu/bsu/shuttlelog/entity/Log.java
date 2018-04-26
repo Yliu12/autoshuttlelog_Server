@@ -31,7 +31,7 @@ public class Log {
 	@Column(name = "id")
 	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "LOG_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
-	private BigInteger id;
+	private long id;
 
 	@Column(name = "LOOP_NAME")
 	private String loopName;
@@ -68,7 +68,7 @@ public class Log {
 				+ position + "]";
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -124,7 +124,7 @@ public class Log {
 		this.time = time;
 	}
 
-	public BigInteger getId() {
+	public long getId() {
 		return id;
 	}
 

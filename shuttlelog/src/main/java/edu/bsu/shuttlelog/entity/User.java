@@ -21,10 +21,10 @@ public class User {
 	
 	//Oracle
 
-	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "	USER_SEQ")
+	@SequenceGenerator(name = "generator", allocationSize = 1, initialValue = 1, sequenceName = "	SL_USER_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator")
 	@Column(name = "id")
-	private long id;
+	private long id; 
 
 	@Column(name = "Create_time")
 	private Timestamp createTime;

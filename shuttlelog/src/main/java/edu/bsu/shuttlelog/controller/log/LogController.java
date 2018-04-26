@@ -50,7 +50,7 @@ public class LogController {
 	@PostMapping("/logs")
 	public ResponseEntity<?> save(@RequestBody LogReq logreq, @RequestHeader(value = "token") String token) {
 		MyResp myresp = new MyResp();
-		List<BigInteger> idList = null;
+		List<Long> idList = null;
 
 		try {
 			// driver authentication. Throw RespException error 403 if not authorized.

@@ -8,7 +8,7 @@ import edu.bsu.shuttlelog.entity.Log;
 public interface LogService {
 	List<Log> list();
 
-	List<BigInteger> save(LogReq logReq) throws Exception;
+	List<Long> save(LogReq logReq) throws Exception;
 
 	Log getByID(long id);
 

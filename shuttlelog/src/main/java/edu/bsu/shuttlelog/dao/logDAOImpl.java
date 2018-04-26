@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -28,8 +29,23 @@ public class logDAOImpl implements LogDAO {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
+		Calendar cal = Calendar.getInstance();
+		Date date = new Date();
+		cal.setTime(date);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date begin = cal.getTime();
+		cal.add(Calendar.DATE, 1);
+		Date end = cal.getTime();
+
 		// create a query
-		Query<Log> theQuery = currentSession.createQuery("from Log order by id desc", Log.class);
+		Query<Log> theQuery = currentSession
+				.createQuery("from Log where time >= :begin AND time < :end order by time desc", Log.class);
+		theQuery.setMaxResults(100);
+		theQuery.setParameter("begin", begin);
+		theQuery.setParameter("end", end);
 
 		// execute query and get result
 		List<Log> logs = theQuery.getResultList();
@@ -45,9 +61,9 @@ public class logDAOImpl implements LogDAO {
 
 	@Override
 	@Transactional
-	public List<BigInteger> save(List<Log> logs) {
+	public List<Long> save(List<Log> logs) {
 		Session session = sessionFactory.getCurrentSession();
-		List<BigInteger> IDList = new ArrayList<BigInteger>();
+		List<Long> IDList = new ArrayList<Long>();
 		int i = 0;
 
 		for (Log log : logs) {
@@ -84,10 +100,9 @@ public class logDAOImpl implements LogDAO {
 	// TODO Error handling, When Username exist
 	@Override
 	@Transactional
-	public BigInteger save(Log log) {
+	public long save(Log log) {
 		sessionFactory.getCurrentSession().save(log);
 		return log.getId();
-
 	}
 
 	private List searchOne(Log log) {
@@ -100,7 +115,7 @@ public class logDAOImpl implements LogDAO {
 			cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + 1);
 		}
 		cal.set(Calendar.MILLISECOND, 0);
-		
+
 		Timestamp ts = new Timestamp(cal.getTimeInMillis());
 
 		Query query = currentSession.createQuery("from Log l where l.time = :time and l.busId = :busId");
@@ -108,7 +123,7 @@ public class logDAOImpl implements LogDAO {
 		query.setParameter("time", ts);
 		System.out.println(ts);
 		query.setParameter("busId", log.getBusId());
-		List l  = query.getResultList();
+		List l = query.getResultList();
 		return l;
 	}
 
