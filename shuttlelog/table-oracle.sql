@@ -167,7 +167,7 @@ CREATE TABLE DAILYREPORT_hour(
     ID number(19) NOT NULL,
     Record_date timestamp(0),
     LOOP_NAME varchar2(32),
-    hour number(2),
+    Record_hour number(2),
     NUMBER_BOARDED number(19),
     NUMBER_LEFT number(19),
 	PRIMARY KEY (ID)
@@ -187,24 +187,24 @@ END;
 
 insert into  DAILYREPORT_hour(
     Record_date,
-    hour,
+    Record_hour,
     LOOP_NAME,
     NUMBER_BOARDED,
     NUMBER_LEFT
 )
 SELECT record_date,
-       HOUR,
+       Record_HOUR,
        loop_name,
        SUM(number_boarded) AS NUMBER_BOARDED,
        SUM(number_left)    AS NUMBER_LEFT
 FROM   (SELECT DISTINCT Concat(record_time, bus_id) AS Hash,
                          TRUNC(record_time)   AS Record_date,
-                        EXTRACT(HOUR from record_time)  AS HOUR,
+                        EXTRACT(HOUR from record_time)  AS Record_HOUR,
                         loop_name,
                         number_boarded,
                         number_left
         FROM   log where TRUNC(record_time) = TRUNC(SYSDATE) - 1)
-GROUP  BY HOUR,
+GROUP  BY Record_HOUR,
           loop_name,
           record_date;
 

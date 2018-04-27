@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.bsu.shuttlelog.dao.LoopDAO;
 import edu.bsu.shuttlelog.entity.Loop;
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.RespException;
 
 @Service
 @Transactional

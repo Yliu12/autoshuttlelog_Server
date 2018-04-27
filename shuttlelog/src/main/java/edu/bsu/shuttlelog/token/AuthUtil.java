@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpHeaders;
 
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.RespException;
 
 public class AuthUtil {
 	public static final String MANAGER_CODE = "MANAGER";

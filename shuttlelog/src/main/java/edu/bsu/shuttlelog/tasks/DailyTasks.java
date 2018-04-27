@@ -25,26 +25,26 @@ public class DailyTasks {
 		try {
 			String sql = "insert into  DAILYREPORT_hour(\n" + 
 					"    Record_date,\n" + 
-					"    hour,\n" + 
+					"    Record_hour,\n" + 
 					"    LOOP_NAME,\n" + 
 					"    NUMBER_BOARDED,\n" + 
 					"    NUMBER_LEFT\n" + 
 					")\n" + 
 					"SELECT record_date,\n" + 
-					"       HOUR,\n" + 
+					"       Record_HOUR,\n" + 
 					"       loop_name,\n" + 
 					"       SUM(number_boarded) AS NUMBER_BOARDED,\n" + 
 					"       SUM(number_left)    AS NUMBER_LEFT\n" + 
 					"FROM   (SELECT DISTINCT Concat(record_time, bus_id) AS Hash,\n" + 
 					"                         TRUNC(record_time)   AS Record_date,\n" + 
-					"                        EXTRACT(HOUR from record_time)  AS HOUR,\n" + 
+					"                        EXTRACT(HOUR from record_time)  AS Record_HOUR,\n" + 
 					"                        loop_name,\n" + 
 					"                        number_boarded,\n" + 
 					"                        number_left\n" + 
 					"        FROM   log where TRUNC(record_time) = TRUNC(SYSDATE) - 1)\n" + 
-					"GROUP  BY HOUR,\n" + 
+					"GROUP  BY Record_HOUR,\n" + 
 					"          loop_name,\n" + 
-					"          record_date;";
+					"          record_date";
 			int result = baseService.excuteBySql(sql);
 			System.out.println("---009:" + result);
 		} catch (Exception e) {
@@ -81,7 +81,7 @@ public class DailyTasks {
 					"        FROM   log log where TRUNC(record_time) = TRUNC(SYSDATE) - 1) \n" + 
 					"GROUP  BY stop_name, \n" + 
 					"          loop_name, \n" + 
-					"          record_date; ";
+					"          record_date";
 			int result = baseService.excuteBySql(sql);
 			System.out.println("---009:" + result);
 		} catch (Exception e) {

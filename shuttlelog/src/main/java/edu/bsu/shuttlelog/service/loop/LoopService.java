@@ -1,7 +1,7 @@
 package edu.bsu.shuttlelog.service.loop;
 
 import edu.bsu.shuttlelog.entity.Loop;
-import edu.bsu.shuttlelog.resp.MyResp;
+import edu.bsu.shuttlelog.resppojo.MyResp;
 
 public interface LoopService {
 	MyResp list() throws Exception;

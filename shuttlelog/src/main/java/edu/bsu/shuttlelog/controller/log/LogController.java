@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import edu.bsu.shuttlelog.entity.Log;
-import edu.bsu.shuttlelog.resp.MyResp;
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.MyResp;
+import edu.bsu.shuttlelog.resppojo.RespException;
 import edu.bsu.shuttlelog.service.log.LogReq;
 import edu.bsu.shuttlelog.service.log.LogService;
 import edu.bsu.shuttlelog.token.AuthUtil;

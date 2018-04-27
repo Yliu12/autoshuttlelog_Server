@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import edu.bsu.shuttlelog.entity.User;
-import edu.bsu.shuttlelog.resp.MyResp;
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.MyResp;
+import edu.bsu.shuttlelog.resppojo.RespException;
 import edu.bsu.shuttlelog.service.UserService;
 import edu.bsu.shuttlelog.token.AuthUtil;
 import edu.bsu.shuttlelog.token.JavaWebToken;

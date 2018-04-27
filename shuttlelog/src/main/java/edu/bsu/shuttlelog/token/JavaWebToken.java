@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.log4j.Logger;
 
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.RespException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import javax.xml.bind.DatatypeConverter;

@@ -25,7 +25,7 @@ public class DailyReportByHour {
 	@Column(name = "LOOP_NAME")
 	private String loopName;
 
-	@Column(name = "hour")
+	@Column(name = "Record_hour")
 	private String hour;
 
 	@Column(name = "NUMBER_BOARDED")

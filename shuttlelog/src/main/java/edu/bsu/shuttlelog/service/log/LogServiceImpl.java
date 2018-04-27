@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.bsu.shuttlelog.dao.LogDAO;
 import edu.bsu.shuttlelog.entity.Log;
 import edu.bsu.shuttlelog.entity.User;
-import edu.bsu.shuttlelog.resp.RespException;
+import edu.bsu.shuttlelog.resppojo.RespException;
 import edu.bsu.shuttlelog.service.UserService;
 
 @Service

@@ -10,19 +10,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import edu.bsu.shuttlelog.entity.DailyReportByHour;
 import edu.bsu.shuttlelog.entity.DailyReportByStop;
-import edu.bsu.shuttlelog.service.DailyReportHourService;
-import edu.bsu.shuttlelog.service.DailyReportStopService;
+import edu.bsu.shuttlelog.reqpojo.DataSummaryReq;
+import edu.bsu.shuttlelog.service.ReportByHourService;
+import edu.bsu.shuttlelog.service.ReportByStopService;
 
 @Controller
 public class DashboardReportController {
 	@Autowired
-	DailyReportHourService dailyReportHourService;
+	ReportByHourService dailyReportHourService;
 	@Autowired
-	DailyReportStopService dailyReportStopService;
-
+	ReportByStopService dailyReportStopService;
 
 	private static Logger logger = Logger.getLogger(DashboardReportController.class);
 
@@ -50,6 +52,23 @@ public class DashboardReportController {
 
 			List<DailyReportByStop> drh = dailyReportStopService.getByDate(date);
 			return ResponseEntity.ok().body(drh);
+
+		} catch (Exception e) {
+			logger.error(e);
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
+		}
+	}
+
+	@PostMapping("/databystop")
+	public ResponseEntity<?> getDailyDataByStop(@RequestBody DataSummaryReq dataSummaryReq) {
+		try {
+			Object obj = null;
+			System.out.println(dataSummaryReq);
+			logger.debug("DashboardReportController.getDailyDataByStop " + dataSummaryReq);
+
+			 obj = dailyReportHourService.getBySummary(dataSummaryReq);
+			return ResponseEntity.ok().body(obj);
 
 		} catch (Exception e) {
 			logger.error(e);

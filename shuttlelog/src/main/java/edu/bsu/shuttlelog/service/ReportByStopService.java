@@ -1,4 +1,4 @@
-package edu.bsu.shuttlelog.dao;
+package edu.bsu.shuttlelog.service;
 
 import java.sql.Date;
 import java.util.List;
@@ -6,6 +6,6 @@ import java.util.List;
 import edu.bsu.shuttlelog.entity.DailyReportByHour;
 import edu.bsu.shuttlelog.entity.DailyReportByStop;
 
-public interface DailyReportHourDao {
-	public List<DailyReportByHour> getByDate(Date date) throws Exception;
+public interface ReportByStopService {
+	public List<DailyReportByStop> getByDate(Date date) throws Exception;
 }

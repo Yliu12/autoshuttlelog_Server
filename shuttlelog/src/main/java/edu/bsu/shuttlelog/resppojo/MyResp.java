@@ -1,4 +1,4 @@
-package edu.bsu.shuttlelog.resp;
+package edu.bsu.shuttlelog.resppojo;
 
 public class MyResp {
 
