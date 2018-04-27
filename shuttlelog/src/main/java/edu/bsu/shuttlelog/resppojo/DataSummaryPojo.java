@@ -2,20 +2,39 @@ package edu.bsu.shuttlelog.resppojo;
 
 import java.math.BigDecimal;
 
-public class DataSummaryByHour {
+public class DataSummaryPojo {
 
-	private String hour;
+	private String stop;
 
 	private BigDecimal totalNumBoarded;
 
 	private BigDecimal totalNumLeft;
 
-	public String getHour() {
-		return hour;
+	private String loop;
+	private int Hour;
+
+	public String getLoop() {
+		return loop;
 	}
 
-	public void setHour(String hour) {
-		this.hour = hour;
+	public void setLoop(String loop) {
+		this.loop = loop;
+	}
+
+	public int getHour() {
+		return Hour;
+	}
+
+	public void setHour(int hour) {
+		Hour = hour;
+	}
+
+	public String getStop() {
+		return stop;
+	}
+
+	public void setStop(String stop) {
+		this.stop = stop;
 	}
 
 	public BigDecimal getTotalNumBoarded() {
@@ -36,10 +55,10 @@ public class DataSummaryByHour {
 
 	@Override
 	public String toString() {
-		return "DataSummaryByHour [hour=" + hour + ", totalNumBoarded=" + totalNumBoarded + ", totalNumLeft="
+		return "DataSummaryByStop [stop=" + stop + ", totalNumBoarded=" + totalNumBoarded + ", totalNumLeft="
 				+ totalNumLeft + "]";
 	}
 
-	
+
 
 }

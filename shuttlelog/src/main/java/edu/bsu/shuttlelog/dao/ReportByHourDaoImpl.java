@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.bsu.shuttlelog.entity.DailyReportByHour;
 import edu.bsu.shuttlelog.reqpojo.DataSummaryReq;
-import edu.bsu.shuttlelog.resppojo.DataSummaryByHour;
+import edu.bsu.shuttlelog.resppojo.DataSummaryPojo;
 
 @Repository
 public class ReportByHourDaoImpl implements ReportHourDao {
@@ -47,26 +47,25 @@ public class ReportByHourDaoImpl implements ReportHourDao {
 
 	@Override
 	@Transactional
-	public List<DataSummaryByHour> getBySummary(DataSummaryReq req) throws Exception {
+	public List<DataSummaryPojo> getBySummary(DataSummaryReq req) throws Exception {
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		List<DataSummaryByHour> resultList = new ArrayList<DataSummaryByHour>();
+		List<DataSummaryPojo> resultList = new ArrayList<DataSummaryPojo>();
 
 		List list = currentSession.createNativeQuery(
-				"select Record_hour, sum(NUMBER_BOARDED), sum(NUMBER_LEFT) from  DAILYREPORT_hour where Record_Date >= :begin AND Record_Date <= :end and loop_Name = :loopName group by Record_hour")
-				.setParameter("begin", req.getFromDate()).setParameter("end", req.getToDate())
-				.setParameter("loopName", req.getLoopName()).list();
+				"select Record_hour, Loop_Name,sum(NUMBER_BOARDED), sum(NUMBER_LEFT) from  DAILYREPORT_hour where Record_Date >= :begin AND Record_Date <= :end group by Record_hour,Loop_Name")
+				.setParameter("begin", req.getFromDate()).setParameter("end", req.getToDate()).list();
 
 		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 			Object[] row = (Object[]) iterator.next();
-			DataSummaryByHour dsh = new DataSummaryByHour();
-			BigDecimal bdHour =  (BigDecimal) row[0];
-			dsh.setHour(bdHour.toString());
-			dsh.setTotalNumBoarded((BigDecimal) row[1]);
-			dsh.setTotalNumLeft((BigDecimal) row[2]);
+			DataSummaryPojo dsh = new DataSummaryPojo();
+			BigDecimal bdHour = (BigDecimal) row[0];
+			dsh.setHour(bdHour.intValue());
+			dsh.setLoop((String) row[1]);
+			dsh.setTotalNumBoarded((BigDecimal) row[2]);
+			dsh.setTotalNumLeft((BigDecimal) row[3]);
 			resultList.add(dsh);
-
 		}
 		logger.debug("resultList" + resultList.toString());
 		return resultList;

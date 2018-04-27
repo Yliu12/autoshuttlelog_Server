@@ -8,9 +8,11 @@ public class DataSummaryReq {
 	private Date toDate;
 	private String loopName;
 
+
+
 	@Override
 	public String toString() {
-		return "DataSummaryReq [from=" + fromDate + ", to=" + toDate + ", loopName=" + loopName + "]";
+		return "DataSummaryReq [fromDate=" + fromDate + ", toDate=" + toDate + ", loopName=" + loopName + "]";
 	}
 
 	public Date getFromDate() {

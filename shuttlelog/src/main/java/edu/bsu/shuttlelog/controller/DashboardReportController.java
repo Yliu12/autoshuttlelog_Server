@@ -1,7 +1,9 @@
 package edu.bsu.shuttlelog.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import edu.bsu.shuttlelog.entity.DailyReportByHour;
 import edu.bsu.shuttlelog.entity.DailyReportByStop;
 import edu.bsu.shuttlelog.reqpojo.DataSummaryReq;
+import edu.bsu.shuttlelog.resppojo.DataSummaryPojo;
 import edu.bsu.shuttlelog.service.ReportByHourService;
 import edu.bsu.shuttlelog.service.ReportByStopService;
 
@@ -63,12 +66,14 @@ public class DashboardReportController {
 	@PostMapping("/databystop")
 	public ResponseEntity<?> getDailyDataByStop(@RequestBody DataSummaryReq dataSummaryReq) {
 		try {
-			Object obj = null;
+			Map<String, Object> resultMap = new HashMap<String, Object>();
 			System.out.println(dataSummaryReq);
 			logger.debug("DashboardReportController.getDailyDataByStop " + dataSummaryReq);
 
-			 obj = dailyReportHourService.getBySummary(dataSummaryReq);
-			return ResponseEntity.ok().body(obj);
+			resultMap.put("byHour", dailyReportHourService.getBySummary(dataSummaryReq));
+			resultMap.put("byStop", dailyReportStopService.getBySummary(dataSummaryReq));
+
+			return ResponseEntity.ok().body(resultMap);
 
 		} catch (Exception e) {
 			logger.error(e);
