@@ -34,9 +34,9 @@ Please add [this](https://yingliucapstone.wordpress.com/2018/03/19/add-this-to-w
   
   I've done the pom.xml part, you'll need the Maven settings and tomcat user configurations.
   
-  Then tart Tomcat (run startup.bash or .sh under bin folder),
+ Start Tomcat (run startup.bash or .sh under bin folder),
   
-  Go to code and 
+  Go to /shuttlelog and 
 
   ```
   mvn tomcat7:deploy
