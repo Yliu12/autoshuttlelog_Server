@@ -63,7 +63,7 @@ public class DashboardReportController {
 		}
 	}
 
-	@PostMapping("/databystop")
+	@PostMapping("/datasummary")
 	public ResponseEntity<?> getDailyDataByStop(@RequestBody DataSummaryReq dataSummaryReq) {
 		try {
 			Map<String, Object> resultMap = new HashMap<String, Object>();
