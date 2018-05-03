@@ -113,4 +113,15 @@ public class UserDAOImpl implements UserDAO {
 		return user2;
 	}
 
+	@Override
+	@Transactional
+	public boolean delete(long id) {
+		boolean successFlag = false;
+
+		Session session = sessionFactory.getCurrentSession();
+		User user2 = session.byId(User.class).load(id);
+		session.delete(user2);
+		successFlag = true;
+		return successFlag;
+	}
 }

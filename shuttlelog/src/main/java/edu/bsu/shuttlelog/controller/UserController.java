@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,7 +79,7 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
 			}
 		} catch (Exception e) {
-			myresp.setError(new RespException("11", "username is taken",e));
+			myresp.setError(new RespException("11", "username is taken", e));
 		}
 
 		return ResponseEntity.ok().body(myresp);
@@ -101,7 +102,7 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
 			}
 		} catch (Exception e) {
-			myresp.setError(new RespException("11", "username is taken",e));
+			myresp.setError(new RespException("11", "username is taken", e));
 		}
 		return ResponseEntity.ok().body("New users have been saved with ID:" + myresp);
 
@@ -122,7 +123,27 @@ public class UserController {
 				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
 			}
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new RespException("12", "Error Edding User", e));
+			return ResponseEntity.badRequest().body(new RespException("12", "Error updating User", e));
+		}
+		return ResponseEntity.ok().body(myresp);
+
+	}
+
+	/*---delete a user by id---*/
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<?> delete(@PathVariable("id") long id, @RequestHeader(value = "token") String token) {
+
+		MyResp myresp = new MyResp();
+		try {
+			AuthUtil.userAuth(token, AuthUtil.MANAGER_CODE);
+			myresp.setRespBody(userService.delete(id));
+		} catch (RespException e) {
+			myresp.setError(e);
+			if (e.getRetCd().equals("403")) {
+				return ResponseEntity.status(HttpStatus.FORBIDDEN).body(myresp);
+			}
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(new RespException("13", "Error deleting User", e));
 		}
 		return ResponseEntity.ok().body(myresp);
 
